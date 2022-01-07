@@ -111,7 +111,7 @@ function App() {
       }
       arr3.push(pos.x, pos.y, wid)
       arr.push(pos.x, pos.y)
-      // console.log(arr4)
+      console.log(arr4)
       setPatarr(arr4)
       const str1 = arr.join()
       
@@ -148,7 +148,7 @@ function App() {
     else if (cmyk && flag) {
       flag = false
       for(let i=0; i<arr3.length-4; i+=3){
-        arr2.push([arr3[i], arr3[i+1], arr3[i+3], arr3[i+4], arr3[i+2], r, g, b])
+        arr2.push([arr3[i], arr3[i+1], arr3[i+3], arr3[i+4], arr3[i+2]])
       }
       result2.push(arr2)
       // console.log(result2)
@@ -170,17 +170,6 @@ function App() {
     pencil = true
     erase = false
     cmyk = false
-  }
-  function getRandomInt(min:number, max:number) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min; //최댓값은 제외, 최솟값은 포함
-  }
-  const clickColor = () =>{
-    r = 0
-    g = 0
-    b = 255
-    console.log(r, g, b)
   }
   const arrowClick = (props: any, e: any) => {
     e.preventDefault()
@@ -210,13 +199,12 @@ function App() {
       <button onClick={colorChange}>CMYK</button>
       <button onClick={clickHandle}>pencil</button>
       <button onClick={changeTool}>erase</button>
-      <button onClick={clickColor}>color</button>
       <div ref={canvasRef} id="slide" style={{ width: "1200px", height: "1200px", border: "1px solid black" }}>
         <div style={{ width: "auto", height: "100%" }}>
           <svg width="100%" height="100%">
-            {cmyk?(patarr.length?((<g>{patarr.map((item) => {return <path stroke={`rgb(${r},${g},${b})`} fill={`rgb(${r},${g},${b})`}  strokeLinecap="round" strokeWidth={item[4]} d={`M ${item[0]} ${item[1]} ${item[2]} ${item[3]}`}></path>})}</g>)):(null)):(<path onClick={() => setPat("0,0,0,0")} fill="transparent" stroke="rgb(0,0,0)" strokeLinecap="round" strokeWidth="1" d={`M ${pat}`}></path>)}
+            {cmyk?(patarr.length?((<g>{patarr.map((item) => {return <path stroke="rgb(0,0,0)" fill="transparent"  strokeLinecap="round" strokeWidth={item[4]} d={`M ${item[0]} ${item[1]} ${item[2]} ${item[3]}`}></path>})}</g>)):(null)):(<path onClick={() => setPat("0,0,0,0")} fill="transparent" stroke="rgb(0,0,0)" strokeLinecap="round" strokeWidth="1" d={`M ${pat}`}></path>)}
             {inkresult.length ? (inkresult.map((item: any, index: Number) => { return <path onClick={(e) => { arrowClick(index, e) }} strokeLinecap="round" fill="transparent" stroke="rgb(0,0,0)" strokeWidth={"1"} d={`M ${item.join()}`}></path> })) : (null)}
-            {inkresult2.map((items:any, index:any) => {return <g>{items.map((item:any) => {return <path onClick={(e) => {console.log("hello")}} strokeLinecap="round" fill={`rgb(${item[5]},${item[6]},${item[7]})`} stroke={`rgb(${item[5]},${item[6]},${item[7]})`} strokeWidth={item[4]} d={`M ${item[0]} ${item[1]} ${item[2]} ${item[3]}`}></path>})}</g>})}
+            {inkresult2.map((items:any, index:any) => {return <g>{items.map((item:any) => {return <path onClick={(e) => {console.log("hello")}} strokeLinecap="round" fill="transparent" stroke="rgb(0,0,0)" strokeWidth={item[4]} d={`M ${item[0]} ${item[1]} ${item[2]} ${item[3]}`}></path>})}</g>})}
             {/* {arrrr.map((item:any) => {return <path  stroke="rgb(0,0,0)" fill="rgb(0,0,0)" strokeLinecap="square" strokeWidth="30" d = {`M ${item.join()}`}></path>})} */}
           </svg></div>
 
